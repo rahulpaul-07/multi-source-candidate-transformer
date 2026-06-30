@@ -1,0 +1,5 @@
+Call with Bob today — strong candidate, ~8 years experience.
+Reach him at bob.smith@gmail.com or +1 555 123 4567.
+Heavy Python and Kubernetes, some React. Also Go and GraphQL.
+Name: Robert Smith
+Skills: Python, Go, GraphQL

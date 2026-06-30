@@ -1,0 +1,6 @@
+{ "login": "priya-dev", "name": "Priya Sharma",
+  "bio": "ML engineer · NLP & recommender systems",
+  "location": "Bengaluru, India", "html_url": "https://github.com/priya-dev",
+  "repos": [ {"name": "nlp-toolkit", "language": "Python"},
+             {"name": "recsys", "language": "Python"},
+             {"name": "infra", "language": "Go"} ] }

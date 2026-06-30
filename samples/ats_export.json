@@ -1,0 +1,23 @@
+{ "candidates": [
+  { "applicant_id": "A-1", "first_name": "Robert", "last_name": "Smith",
+    "contact": { "primary_email": "robert@acme.com", "mobile_number": "+1 555 123 4567" },
+    "city": "Austin", "state": "TX", "country": "United States",
+    "social": { "linkedin_url": "https://linkedin.com/in/robsmith", "github_url": "https://github.com/robsmith" },
+    "employer": "Acme Corp", "job_title": "Senior Software Engineer",
+    "skill_set": ["Python", "JS", "Kubernetes"],
+    "work_history": [ {"org": "Globex", "position": "Engineer", "from": "2018-06", "to": "2021-03"} ],
+    "education": [ {"school": "UT Austin", "qualification": "BS", "major": "Computer Science", "graduated": 2018} ] },
+
+  { "applicant_id": "A-2", "full_name": "Priya Sharma",
+    "contact": { "primary_email": "priya.sharma@flowai.com", "mobile_number": "+91 98765 43210" },
+    "city": "Bengaluru", "country": "India",
+    "social": { "github_url": "https://github.com/priya-dev" },
+    "employer": "FlowAI", "job_title": "Machine Learning Engineer",
+    "skills": ["python", "pytorch", "tensorflow", "sql"],
+    "education": [ {"school": "IIT Bombay", "qualification": "BTech", "major": "Electrical Engineering", "graduated": 2017} ] },
+
+  { "applicant_id": "A-3", "first_name": "Wei", "last_name": "Liang",
+    "contact": { "primary_email": "liang@globex.io" },
+    "employer": "Globex", "job_title": "Principal Engineer",
+    "skill_set": ["Go", "Kafka", "Kubernetes"] }
+] }
