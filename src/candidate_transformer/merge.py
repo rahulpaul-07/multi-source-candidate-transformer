@@ -153,8 +153,16 @@ def _exp_key(v: dict) -> tuple:
     return ((v.get("company") or "").strip().lower(), (v.get("start") or ""))
 
 
+def _ordered(obs: list[Observation]) -> list[Observation]:
+    # reliable sources first; fully deterministic tie-break (no input-order dependence)
+    return sorted(obs, key=lambda o: (-_rank(o)[0], -_rank(o)[1],
+                                      SOURCE_ORDER.index(o.source.value)
+                                      if o.source.value in SOURCE_ORDER else 99,
+                                      str(o.value)))
+
+
 def _build_exp(obs: list[Observation]) -> Experience:
-    ordered = sorted(obs, key=lambda o: -_rank(o)[0])   # prefer reliable sources
+    ordered = _ordered(obs)
     def pick(field):
         for o in ordered:
             val = o.value.get(field)
@@ -171,7 +179,7 @@ def _edu_key(v: dict) -> tuple:
 
 
 def _build_edu(obs: list[Observation]) -> Education:
-    ordered = sorted(obs, key=lambda o: -_rank(o)[0])
+    ordered = _ordered(obs)
     def pick(field):
         for o in ordered:
             val = o.value.get(field)
@@ -206,8 +214,13 @@ def merge_cluster(records: list[SourceRecord]) -> tuple[CanonicalProfile, dict[s
     profile.skills = [Skill(name=n, confidence=0.0, sources=sorted(skill_sources[n]))
                       for n in sorted(skill_sources)]
 
-    profile.experience = _merge_objects(grouped.get("experience", []), _exp_key, _build_exp)
-    profile.education = _merge_objects(grouped.get("education", []), _edu_key, _build_edu)
+    profile.experience = sorted(
+        _merge_objects(grouped.get("experience", []), _exp_key, _build_exp),
+        key=lambda e: ((e.start or ""), (e.company or "").lower(), (e.title or "").lower()))
+    profile.education = sorted(
+        _merge_objects(grouped.get("education", []), _edu_key, _build_edu),
+        key=lambda e: ((e.institution or "").lower(), (e.degree or "").lower(),
+                       e.end_year or 0))
 
     # provenance: one entry per (field, source, method), sorted for determinism
     prov = {(f, o.source.value, o.method.value)
