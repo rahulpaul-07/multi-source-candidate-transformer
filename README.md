@@ -14,8 +14,9 @@ confidence and can never override a structured one.
 
 ## Pipeline
 
-```
-detect → extract → normalize → merge → score → project → validate
+```mermaid
+flowchart LR
+    D[detect] --> E[extract] --> N[normalize] --> M[merge] --> S[score] --> P[project] --> V[validate]
 ```
 
 Each stage is one module under `src/candidate_transformer/`, so the design maps
