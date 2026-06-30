@@ -1,0 +1,4 @@
+phonenumbers>=8.13
+pycountry>=23.12
+jsonschema>=4.0
+pytest>=7.0

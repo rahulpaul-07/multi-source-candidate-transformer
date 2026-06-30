@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "candidate-transformer"
+version = "0.1.0"
+description = "Multi-source candidate data transformer: messy sources to one canonical, explainable profile."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "phonenumbers>=8.13",
+    "pycountry>=23.12",
+    "jsonschema>=4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+candidate-transformer = "candidate_transformer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
