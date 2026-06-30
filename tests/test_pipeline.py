@@ -77,3 +77,20 @@ def test_required_field_cannot_be_null(sample_inputs):
            "on_missing": "null"}
     with pytest.raises(jsonschema.ValidationError):
         run_pipeline(sample_inputs, cfg)
+
+
+def test_on_missing_omit_drops_field(sample_inputs):
+    cfg = {"fields": [{"path": "full_name", "type": "string"},
+                      {"path": "gh", "from": "links.github", "type": "string"}],
+           "on_missing": "omit", "include_provenance": False, "include_confidence": False}
+    res = _by_name(run_pipeline(sample_inputs, cfg))
+    assert "gh" not in res["Bob Smith"]                  # missing -> omitted entirely
+    assert res["Robert Smith"]["gh"].endswith("robsmith")  # present -> kept
+
+
+def test_experience_and_education_merge(sample_inputs):
+    rob = _by_name(run_pipeline(sample_inputs))["Robert Smith"]
+    companies = [e["company"] for e in rob["experience"]]
+    assert companies.count("Acme Corp") == 1   # CSV + ATS current role collapse to one
+    assert "Globex" in companies               # distinct prior role kept separate
+    assert rob["education"][0]["institution"] == "UT Austin"
