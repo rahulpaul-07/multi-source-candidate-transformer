@@ -1,0 +1,52 @@
+[
+  {
+    "full_name": "Robert Smith",
+    "primary_email": "robert@acme.com",
+    "phone": "+15551234567",
+    "github": "https://github.com/robsmith",
+    "skills": [
+      "Go",
+      "GraphQL",
+      "JavaScript",
+      "Kubernetes",
+      "Python",
+      "React",
+      "Shell"
+    ],
+    "overall_confidence": 0.888
+  },
+  {
+    "full_name": "Priya Sharma",
+    "primary_email": "priya.sharma@flowai.com",
+    "phone": "+919876543210",
+    "github": "https://github.com/priya-dev",
+    "skills": [
+      "Go",
+      "PyTorch",
+      "Python",
+      "SQL",
+      "TensorFlow"
+    ],
+    "overall_confidence": 0.91
+  },
+  {
+    "full_name": "Bob Smith",
+    "primary_email": "bob@personal.com",
+    "phone": null,
+    "github": null,
+    "skills": null,
+    "overall_confidence": 0.85
+  },
+  {
+    "full_name": "Wei Liang",
+    "primary_email": "liang@globex.io",
+    "phone": "+15559876543",
+    "github": null,
+    "skills": [
+      "Go",
+      "Kafka",
+      "Kubernetes"
+    ],
+    "overall_confidence": 0.889
+  }
+]
