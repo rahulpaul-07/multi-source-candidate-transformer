@@ -16,7 +16,7 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from ..schema import Observation, SourceType
+from ..schema import SourceRecord, SourceType
 
 log = logging.getLogger("candidate_transformer")
 
@@ -27,8 +27,8 @@ class Extractor(ABC):
     source_type: SourceType
 
     @abstractmethod
-    def extract(self, ref: str) -> list[Observation]:
-        """Read ``ref`` and return canonical-named Observations."""
+    def extract(self, ref: str) -> list[SourceRecord]:
+        """Read ``ref`` and return one SourceRecord per entity found."""
         raise NotImplementedError
 
 
@@ -42,16 +42,18 @@ def get_extractor(source_type: SourceType) -> Optional["Extractor"]:
     return REGISTRY.get(source_type)
 
 
-def safe_extract(source_type: SourceType, ref: str) -> list[Observation]:
+def safe_extract(source_type: SourceType, ref: str) -> list[SourceRecord]:
     """Run the right extractor, degrading gracefully on any failure."""
     extractor = get_extractor(source_type)
     if extractor is None:
         log.warning("no extractor registered for %s (skipping %r)", source_type, ref)
         return []
     try:
-        obs = extractor.extract(ref)
-        log.info("%s: %d observation(s) from %r", source_type.value, len(obs), ref)
-        return obs
+        records = extractor.extract(ref)
+        n_obs = sum(len(r.observations) for r in records)
+        log.info("%s: %d record(s), %d observation(s) from %r",
+                 source_type.value, len(records), n_obs, ref)
+        return records
     except Exception as exc:  # noqa: BLE001 - robustness: never let one source crash the run
         log.warning("failed to extract %s from %r: %s (skipping)", source_type.value, ref, exc)
         return []

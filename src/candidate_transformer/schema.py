@@ -81,6 +81,19 @@ class Observation:
 
 
 # --------------------------------------------------------------------------- #
+# A source record: all observations that came from ONE entity in ONE source    #
+# --------------------------------------------------------------------------- #
+@dataclass
+class SourceRecord:
+    """Observations belonging to a single entity (one CSV row, one ATS object,
+    one notes block, one GitHub profile). Keeping them grouped lets the merge
+    stage do identity resolution *across* records instead of guessing which
+    loose facts belong together."""
+    source: SourceType
+    observations: list["Observation"] = field(default_factory=list)
+
+
+# --------------------------------------------------------------------------- #
 # Sub-objects of the canonical profile                                          #
 # --------------------------------------------------------------------------- #
 @dataclass
