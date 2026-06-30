@@ -1,4 +1,5 @@
 # Multi-Source Candidate Data Transformer
+[![tests](https://github.com/rahulpaul-07/multi-source-candidate-transformer/actions/workflows/ci.yml/badge.svg)](https://github.com/rahulpaul-07/multi-source-candidate-transformer/actions/workflows/ci.yml)
 
 Turns messy, conflicting candidate data from many sources into **one clean,
 canonical profile per candidate** — normalized, deduplicated, and carrying
