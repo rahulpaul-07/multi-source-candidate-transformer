@@ -1,0 +1,14 @@
+{
+  "login": "robsmith",
+  "name": "Robert Smith",
+  "bio": "Senior Software Engineer · distributed systems & platform",
+  "blog": "https://robsmith.dev",
+  "location": "Austin, USA",
+  "html_url": "https://github.com/robsmith",
+  "repos": [
+    {"name": "stream-router", "language": "Go"},
+    {"name": "ml-utils", "language": "Python"},
+    {"name": "infra", "language": "Python"},
+    {"name": "dotfiles", "language": "Shell"}
+  ]
+}
