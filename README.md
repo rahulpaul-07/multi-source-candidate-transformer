@@ -68,6 +68,18 @@ PYTHONPATH=src python3 -m candidate_transformer samples/*.csv samples/*.json \
     -c config/custom_output.json -o out/custom_output.json
 ```
 
+### Windows (PowerShell)
+
+```powershell
+pip install -r requirements.txt
+$env:PYTHONPATH = "src"
+python -m pytest -q
+
+python -m candidate_transformer samples\recruiter_export.csv samples\ats_export.json `
+  samples\notes\robert.txt samples\notes\priya.txt `
+  samples\github_cache\robsmith.github.json samples\github_cache\priya-dev.github.json `
+  samples\broken.json -o out\default_output.json
+```
 GitHub: pass a fixture file (`*.github.json`) or a handle (`github:robsmith`).
 Live fetching is opt-in and off by default, so runs are deterministic and offline.
 
